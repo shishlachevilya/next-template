@@ -2,26 +2,32 @@ import React from 'react';
 import App from 'next/app';
 import MainLayout from '../src/components/Layouts/MainLayout';
 import { AnimatePresence } from 'framer-motion';
-import DefaultLayout from '../src/components/Layouts/DefaultLayout';
-
 
 class MyApp extends App {
   render() {
     const { Component, pageProps, router } = this.props;
-    let Layout = '';
+    let title = '';
 
-    if (router.route === '/') {
-      Layout = MainLayout;
-    } else {
-      Layout = DefaultLayout;
+    switch (router.route) {
+      case '/':
+        title = 'Main page';
+        break;
+      case '/about':
+        title = 'About page';
+        break;
+      case '/contacts':
+        title = 'Contacts page';
+        break;
+      default:
+        title = 'Main page';
     }
 
     return (
-      <Layout>
+      <MainLayout title={title}>
         <AnimatePresence exitBeforeEnter>
           <Component {...pageProps} key={router.route} />
         </AnimatePresence>
-      </Layout>
+      </MainLayout>
     );
   }
 }

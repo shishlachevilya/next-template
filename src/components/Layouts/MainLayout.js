@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header';
+import Head from 'next/head';
 
 const mainLayoutStyle = {
   margin: 20,
@@ -10,10 +11,15 @@ const mainLayoutStyle = {
   overflowX: 'hidden'
 };
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, title }) => {
 
   return (
-    <div style={ mainLayoutStyle }>
+    <div id="root" style={ mainLayoutStyle }>
+      <Head>
+        <title>{title}</title>
+        <link rel='stylesheet' href='./public/style.css' />
+      </Head>
+
       <Header/>
 
       <div>
